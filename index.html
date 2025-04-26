@@ -36,7 +36,8 @@
           if (place.Latitude && place.Longitude) {
             L.marker([parseFloat(place.Latitude), parseFloat(place.Longitude)])
               .addTo(map)
-              .bindPopup(`<b>${place['Venue Name']}</b><br>
+              .bindPopup(`<b>${place.Venue}</b><br>
+                          <i>${place.Cuisine}</i><br>
                           <i>${place.Neighborhood}</i><br>
                           ${place['Days Available']}<br>
                           ${place['Happy Hour Start']} - ${place['Happy Hour End']}<br>
