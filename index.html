@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chicago Happy Hours</title>
+  <title>Chicago Happy Hour</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
     #map { height: 90vh; width: 100%; }
-    header { padding: 1rem; background: #0074D9; color: white; text-align: center; font-size: 1.5rem; }
+    header { padding: 1rem; background: #6860fc; color: white; text-align: center; font-size: 1.5rem; }
 
     #detail-panel {
       position: fixed;
@@ -108,7 +108,7 @@
         <p><strong>Specialty:</strong> ${place.Specialty}</p>
         <p><strong>Price Highlights:</strong> ${place['Price Highlights'] || 'N/A'}</p>
         <p><strong>Menu:</strong> <a href="${place['Menu Link']}" target="_blank">Menu</a></p>
-        <p><strong>Maps Menu:</strong> <a href="${place['Maps Menu']}" target="_blank">Maps Menu</a></p>
+        <p><strong>Maps Link:</strong> <a href="${place['Maps Link']}" target="_blank">Maps Link</a></p>
         <p><strong>Notes:</strong> ${place.Notes || 'None'}</p>
       `;
       panel.style.display = 'block';
