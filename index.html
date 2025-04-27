@@ -25,6 +25,13 @@
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
+    // Helper function to get the next day in the week
+    function getNextDay(day) {
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const currentIndex = daysOfWeek.indexOf(day);
+      return daysOfWeek[(currentIndex + 1) % 7];
+    }
+
     // Load CSV Data
     Papa.parse('https://raw.githubusercontent.com/wodziaka/HAPPY-hour/refs/heads/main/HAPPY%20hour.csv', {
       download: true,
@@ -35,7 +42,7 @@
         data.forEach(place => {
           if (place.Latitude && place.Longitude) {
             // Format the Days Available into a range
-            const daysArray = place['Days Available'].split(',');
+            const daysArray = place['Days Available'].split(',').map(day => day.trim());
             let formattedDays = '';
 
             // Check for continuous sequences of days
@@ -61,7 +68,7 @@
               }
             }
 
-             // Add Marker with Popup
+            // Add Marker with Popup
             L.marker([parseFloat(place.Latitude), parseFloat(place.Longitude)])
               .addTo(map)
               .bindPopup(`<b>${place.Venue}</b><br>
