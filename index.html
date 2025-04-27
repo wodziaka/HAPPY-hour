@@ -34,12 +34,39 @@
 
         data.forEach(place => {
           if (place.Latitude && place.Longitude) {
+            // Format the Days Available into a range
+            const daysArray = place['Days Available'].split(',');
+            let formattedDays = '';
+
+            // Check for continuous sequences of days
+            for (let i = 0; i < daysArray.length; i++) {
+              const startDay = daysArray[i];
+              let endDay = startDay;
+
+              // Continue adding days if they are consecutive
+              while (i + 1 < daysArray.length && getNextDay(daysArray[i]) === daysArray[i + 1]) {
+                endDay = daysArray[i + 1];
+                i++;
+              }
+
+              if (formattedDays) {
+                formattedDays += ', ';
+              }
+
+              // If the range is more than 1 day, use a dash
+              if (startDay !== endDay) {
+                formattedDays += `${startDay}-${endDay}`;
+              } else {
+                formattedDays += startDay;
+              }
+            }
+
+             // Add Marker with Popup
             L.marker([parseFloat(place.Latitude), parseFloat(place.Longitude)])
               .addTo(map)
               .bindPopup(`<b>${place.Venue}</b><br>
                           <i>${place.Cuisine}</i><br>
-                          <i>${place.Neighborhood}</i><br>
-                          ${place['Days Available']}<br>
+                          ${formattedDays}<br>
                           ${place['Happy Hour Start']} - ${place['Happy Hour End']}<br>
                           Specialty: ${place.Specialty}`);
           }
