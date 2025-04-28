@@ -27,6 +27,7 @@
       font-size: 55px; 
       letter-spacing: 1px;
       border-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wavy-border.svg') 30 round;
+      border-color: #ed2868;
       border-radius: 25px;
       margin: 10px;
     }
@@ -52,6 +53,11 @@
       font-size: 45px;
       padding: 1px;
     }
+    #detail-panel img.detail-image {
+      float: right;
+      width: 120px;
+      margin: 0 0 10px 10px;
+    }    
     .button-link {
       display: inline-block;
       background-color: #fbb61d; /* orange button */
@@ -136,6 +142,7 @@
       const panel = document.getElementById('detail-panel');
       panel.innerHTML = `
         <button class="close-button" onclick="closeDetailPanel()">X</button>
+        <img src="https://img1.picmix.com/output/stamp/normal/0/5/5/9/2659550_5cb22.png" class="detail-image" alt="Decorative Fairy" />
         <h2>${place.Venue}</h2>
         <p><i>${place.Cuisine}</i></p>
         <p><strong>Days:</strong> ${formatDays(place['Days Available'])}</p>
