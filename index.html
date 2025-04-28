@@ -6,6 +6,7 @@
   <title>Chicago Happy Hour</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Ingrid Darling' rel='stylesheet'>
   <style>
     body { 
       font-family: 'Poppins', Arial, sans-serif; 
@@ -22,7 +23,7 @@
       background: #89cbc7; /* turquoise */
       color: white; 
       text-align: center; 
-      font-family: 'Tangerine', serif;
+      font-family: 'Ingrid Darling', serif;
       font-size: 55px; 
       letter-spacing: 1px;
     }
@@ -130,7 +131,7 @@
     function showDetail(place) {
       const panel = document.getElementById('detail-panel');
       panel.innerHTML = `
-        <button class="close-button" onclick="closeDetailPanel()">Close</button>
+        <button class="close-button" onclick="closeDetailPanel()">X</button>
         <h2>${place.Venue}</h2>
         <p><i>${place.Cuisine}</i></p>
         <p><strong>Days:</strong> ${formatDays(place['Days Available'])}</p>
@@ -140,7 +141,6 @@
         <p><strong>Menu:</strong> <a href="${place['Menu Link']}" target="_blank">Menu</a></p>
         <p><strong>Maps Link:</strong> <a href="${place['Maps Link']}" target="_blank">Maps Link</a></p>
         <p><strong>Notes:</strong> ${place.Notes || 'None'}</p>
-        <span class="close-button" onclick="closeDetailPanel()">X</span>
       `;
       panel.style.display = 'block';
     }
