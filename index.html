@@ -26,7 +26,8 @@
       font-family: 'Ingrid Darling', serif;
       font-size: 55px; 
       letter-spacing: 1px;
-      border-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wavy-border.svg') 30 round;
+      border: 20px solid transparent; /* Needed to make room for the image borders */
+      border-image: url('https://static.vecteezy.com/system/resources/thumbnails/026/977/258/small/border-frame-minimal-free-png.png') 30 round;
       border-color: #ed2868;
       border-radius: 25px;
       margin: 10px;
@@ -54,9 +55,9 @@
       padding: 1px;
     }
     #detail-panel img.detail-image {
-      float: right;
-      width: 120px;
-      margin: 0 0 10px 10px;
+      display: block;
+      margin: 30px auto 10px 20px; /* top right bottom left */
+      width: 240px;
     }    
     .button-link {
       display: inline-block;
