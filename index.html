@@ -46,7 +46,7 @@
       color: #ed245d; /* hot pink titles */
       font-family: 'Tangerine', serif;
       font-size: 45px;
-      padding: 5px;
+      padding: 1px;
     }
     .button-link {
       display: inline-block;
@@ -69,7 +69,9 @@
       top: 10px;
       right: 15px;
       font-size: 2rem;
-      color: #ed245d;
+      color: #white;
+      background-color: #89cbc7;
+      border-color: #ed245d;
       cursor: pointer;
       font-weight: bold;
       z-index: 1050;
@@ -88,7 +90,7 @@
   <header>Chicago Happy Hours</header>
   <div id="map"></div>
   <div id="detail-panel">
-    <button class="close-button" onclick="closeDetailPanel()">Close</button>
+    <button class="close-button" onclick="closeDetailPanel()">x</button>
   </div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
