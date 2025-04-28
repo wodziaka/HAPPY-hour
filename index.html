@@ -12,10 +12,23 @@
       margin: 0; 
       padding: 0; 
       background-color: #fff8dc; /* pale yellow */
+      display: flex;
     }
     #map { 
       height: 90vh; 
-      width: 100%; 
+      width: 80%; /* Adjusted for sidebar */
+    }
+    #filter-panel {
+      width: 20%;
+      padding: 20px;
+      background-color: #fdf8dc; /* pale yellow */
+      box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.3);
+      height: 90vh;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 100;
+      overflow-y: auto;
     }
     header { 
       padding: 1rem; 
@@ -25,6 +38,11 @@
       font-family: 'Tangerine', serif;
       font-size: 55px; 
       letter-spacing: 1px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
     }
     #detail-panel {
       position: fixed;
@@ -84,11 +102,47 @@
       background: #fff8dc; /* Pale yellow */
       color: #333; /* (Optional) Make sure text stays readable */
     }
+    .filter-dropdown {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
   <header>Chicago Happy Hours</header>
   <div id="map"></div>
+  
+  <!-- Filter Panel -->
+  <div id="filter-panel">
+    <h3>Filter by:</h3>
+    
+    <!-- Filter by Day -->
+    <div class="filter-dropdown">
+      <label for="day-select">Day of the Week:</label>
+      <select id="day-select">
+        <option value="">Select Day</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+    </div>
+    
+    <!-- Filter by Time -->
+    <div class="filter-dropdown">
+      <label for="time-select">Time:</label>
+      <select id="time-select">
+        <option value="">Select Time</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+        <option value="Night">Night</option>
+      </select>
+    </div>
+  </div>
+
   <div id="detail-panel">
     <button class="close-button" onclick="closeDetailPanel()">x</button>
   </div>
@@ -140,6 +194,7 @@
         <p><strong>Menu:</strong> <a href="${place['Menu Link']}" target="_blank">Menu</a></p>
         <p><strong>Maps Link:</strong> <a href="${place['Maps Link']}" target="_blank">Maps Link</a></p>
         <p><strong>Notes:</strong> ${place.Notes || 'None'}</p>
+        <span class="close-button" onclick="closeDetailPanel()">X</span>
       `;
       panel.style.display = 'block';
     }
@@ -170,6 +225,43 @@
         window.showDetailFromPopup = function(index) {
           const place = data[index];
           showDetail(place);
+        }
+
+        // Filter functionality
+        const daySelect = document.getElementById('day-select');
+        const timeSelect = document.getElementById('time-select');
+
+        daySelect.addEventListener('change', function() {
+          filterPlaces(data);
+        });
+
+        timeSelect.addEventListener('change', function() {
+          filterPlaces(data);
+        });
+
+        function filterPlaces(data) {
+          const selectedDay = daySelect.value;
+          const selectedTime = timeSelect.value;
+          
+          // Filtering logic
+          data.forEach((place, index) => {
+            const marker = L.marker([parseFloat(place.Latitude), parseFloat(place.Longitude)])
+              .addTo(map)
+              .bindPopup(`
+                <b>${place.Venue}</b><br>
+                <i>${place.Cuisine}</i><br>
+                ${formatDays(place['Days Available'])}<br>
+                <div class="button-link" onclick="showDetailFromPopup(${index})">More Info</div>
+              `);
+            
+            if (selectedDay && !place['Days Available'].includes(selectedDay)) {
+              marker.remove();
+            }
+
+            if (selectedTime && !place['Happy Hour Start'].includes(selectedTime)) {
+              marker.remove();
+            }
+          });
         }
       }
     });
