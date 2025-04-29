@@ -19,20 +19,31 @@
       width: 100%;
     }
     header {
-      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 1rem;
       background: #89cbc7;
       color: white;
-      text-align: center;
       font-family: 'Ingrid Darling', serif;
       font-size: 55px;
       letter-spacing: 1px;
     }
-    header img {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      height: 95px;
+    .header-icon {
+      height: 75px;
+      width: auto;
+    }
+
+    .header-icon.left {
+      margin-right: auto;
+    }
+
+    .header-icon.right {
+      margin-left: auto;
+    }
+    .header-title {
+      flex-grow: 1;
+      text-align: center;
     }
     #detail-panel {
       position: fixed;
@@ -103,9 +114,9 @@
 </head>
 <body>
   <header>
-    <img src="https://github.com/wodziaka/HAPPY-hour/blob/main/moon.png?raw=true" />
-    Chicago Happy Hours
     <img src="https://github.com/wodziaka/HAPPY-hour/blob/main/sun.png?raw=true" />
+    Chicago Happy Hours
+    <img src="https://github.com/wodziaka/HAPPY-hour/blob/main/moon.png?raw=true" />
   </header>
 
   <div id="map"></div>
